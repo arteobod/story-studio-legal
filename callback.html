@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TikTok connect — Story Studio</title>
+<style>
+  body{font-family:system-ui,Segoe UI,sans-serif;max-width:640px;margin:60px auto;padding:0 20px;color:#1a1a1b;text-align:center}
+  h1{font-size:22px}
+  .code{font-family:Consolas,monospace;font-size:15px;word-break:break-all;background:#f2f3f5;border:1px solid #ddd;border-radius:10px;padding:16px;margin:18px 0}
+  button{background:#fe2c55;color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer}
+  .muted{color:#777;font-size:14px}
+</style></head><body>
+<h1>Authorization code</h1>
+<p class="muted">Copy this code and paste it into Story Studio (the TikTok connect box) to finish connecting.</p>
+<div class="code" id="code">—</div>
+<button id="copy">Copy code</button>
+<p class="muted" id="err"></p>
+<script>
+  const p = new URLSearchParams(location.search);
+  const code = p.get("code");
+  const err = p.get("error");
+  if (code) { document.getElementById("code").textContent = code; }
+  else { document.getElementById("code").textContent = "(no code in URL)"; if(err) document.getElementById("err").textContent = "Error: "+err; }
+  document.getElementById("copy").onclick = () => { navigator.clipboard.writeText(code||""); document.getElementById("copy").textContent = "Copied ✓"; };
+</script>
+</body></html>
